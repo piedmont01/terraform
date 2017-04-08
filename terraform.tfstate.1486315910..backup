@@ -1,0 +1,520 @@
+{
+    "version": 3,
+    "terraform_version": "0.7.10",
+    "serial": 7,
+    "lineage": "b4f0c510-de05-4276-82a5-68f00b8142d9",
+    "modules": [
+        {
+            "path": [
+                "root"
+            ],
+            "outputs": {},
+            "resources": {
+                "aws_default_route_table.private": {
+                    "type": "aws_default_route_table",
+                    "depends_on": [
+                        "aws_vpc.vpc"
+                    ],
+                    "primary": {
+                        "id": "rtb-36bc1e5f",
+                        "attributes": {
+                            "default_route_table_id": "rtb-36bc1e5f",
+                            "id": "rtb-36bc1e5f",
+                            "propagating_vgws.#": "0",
+                            "route.#": "0",
+                            "tags.%": "1",
+                            "tags.Name": "private",
+                            "vpc_id": "vpc-cf7fdba6"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                },
+                "aws_internet_gateway.internet_gateway": {
+                    "type": "aws_internet_gateway",
+                    "depends_on": [
+                        "aws_vpc.vpc"
+                    ],
+                    "primary": {
+                        "id": "igw-a728fdce",
+                        "attributes": {
+                            "id": "igw-a728fdce",
+                            "vpc_id": "vpc-cf7fdba6"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                },
+                "aws_key_pair.auth": {
+                    "type": "aws_key_pair",
+                    "depends_on": [],
+                    "primary": {
+                        "id": "kyrptonite",
+                        "attributes": {
+                            "id": "kyrptonite",
+                            "key_name": "kyrptonite",
+                            "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCwumU91TR88tA+KWHT7W7tY5WvGDnVPuGTXj04G/7d7vncaIDl1azuZSAcCE+YpcOhqxgi2d+kpH6Wp32ro5Tvwh1WXUsKK+mVKNNpeLeMo58XtGs/nJReWS4+SikKi0ECpFwAwkcA7pUMbzp5Ah/JTnvBCaginBE8si271HbnDFV/WBxV/3Wk9kdtPbpc8bsfXIWl7WCGKS43EPAu9ATAp/v7Fk5CjlN1jOxP16icRBOXLMEj3aefyJzvLeuA4J5/4lYPoEZXqcJ7QwZfG+QjmjJnQnhrLFMyga+zcPozYt2VEVl/L2QTuCZxLh5190DUE/q+vwiDdwCMWkBa918Z ubuntu@ip-10-255-0-189"
+                        },
+                        "meta": {
+                            "schema_version": "1"
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                },
+                "aws_route_table.public": {
+                    "type": "aws_route_table",
+                    "depends_on": [
+                        "aws_internet_gateway.internet_gateway",
+                        "aws_vpc.vpc"
+                    ],
+                    "primary": {
+                        "id": "rtb-0bbc1e62",
+                        "attributes": {
+                            "id": "rtb-0bbc1e62",
+                            "propagating_vgws.#": "0",
+                            "route.#": "1",
+                            "route.650910030.cidr_block": "0.0.0.0/0",
+                            "route.650910030.gateway_id": "igw-a728fdce",
+                            "route.650910030.instance_id": "",
+                            "route.650910030.nat_gateway_id": "",
+                            "route.650910030.network_interface_id": "",
+                            "route.650910030.vpc_peering_connection_id": "",
+                            "tags.%": "1",
+                            "tags.Name": "public",
+                            "vpc_id": "vpc-cf7fdba6"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                },
+                "aws_route_table_association.private1_assoc": {
+                    "type": "aws_route_table_association",
+                    "depends_on": [
+                        "aws_route_table.public",
+                        "aws_subnet.private1"
+                    ],
+                    "primary": {
+                        "id": "rtbassoc-c5bc02ac",
+                        "attributes": {
+                            "id": "rtbassoc-c5bc02ac",
+                            "route_table_id": "rtb-0bbc1e62",
+                            "subnet_id": "subnet-cf69dea6"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                },
+                "aws_route_table_association.private2_assoc": {
+                    "type": "aws_route_table_association",
+                    "depends_on": [
+                        "aws_route_table.public",
+                        "aws_subnet.private2"
+                    ],
+                    "primary": {
+                        "id": "rtbassoc-c4bc02ad",
+                        "attributes": {
+                            "id": "rtbassoc-c4bc02ad",
+                            "route_table_id": "rtb-0bbc1e62",
+                            "subnet_id": "subnet-52837829"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                },
+                "aws_route_table_association.public_assoc": {
+                    "type": "aws_route_table_association",
+                    "depends_on": [
+                        "aws_route_table.public",
+                        "aws_subnet.public"
+                    ],
+                    "primary": {
+                        "id": "rtbassoc-c2bc02ab",
+                        "attributes": {
+                            "id": "rtbassoc-c2bc02ab",
+                            "route_table_id": "rtb-0bbc1e62",
+                            "subnet_id": "subnet-73b3af39"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                },
+                "aws_security_group.RDS": {
+                    "type": "aws_security_group",
+                    "depends_on": [
+                        "aws_security_group.private",
+                        "aws_security_group.public",
+                        "aws_vpc.vpc"
+                    ],
+                    "primary": {
+                        "id": "sg-bfc747d6",
+                        "attributes": {
+                            "description": "Used for DB instances",
+                            "egress.#": "0",
+                            "id": "sg-bfc747d6",
+                            "ingress.#": "1",
+                            "ingress.2854041693.cidr_blocks.#": "0",
+                            "ingress.2854041693.from_port": "3306",
+                            "ingress.2854041693.protocol": "tcp",
+                            "ingress.2854041693.security_groups.#": "2",
+                            "ingress.2854041693.security_groups.2390775104": "sg-bac747d3",
+                            "ingress.2854041693.security_groups.4034715996": "sg-bcc747d5",
+                            "ingress.2854041693.self": "false",
+                            "ingress.2854041693.to_port": "3306",
+                            "name": "sg_rds",
+                            "owner_id": "866893681515",
+                            "tags.%": "0",
+                            "vpc_id": "vpc-cf7fdba6"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                },
+                "aws_security_group.private": {
+                    "type": "aws_security_group",
+                    "depends_on": [
+                        "aws_vpc.vpc"
+                    ],
+                    "primary": {
+                        "id": "sg-bcc747d5",
+                        "attributes": {
+                            "description": "Used for private instances",
+                            "egress.#": "1",
+                            "egress.482069346.cidr_blocks.#": "1",
+                            "egress.482069346.cidr_blocks.0": "0.0.0.0/0",
+                            "egress.482069346.from_port": "0",
+                            "egress.482069346.prefix_list_ids.#": "0",
+                            "egress.482069346.protocol": "-1",
+                            "egress.482069346.security_groups.#": "0",
+                            "egress.482069346.self": "false",
+                            "egress.482069346.to_port": "0",
+                            "id": "sg-bcc747d5",
+                            "ingress.#": "1",
+                            "ingress.1671886063.cidr_blocks.#": "1",
+                            "ingress.1671886063.cidr_blocks.0": "10.1.0.0/16",
+                            "ingress.1671886063.from_port": "0",
+                            "ingress.1671886063.protocol": "-1",
+                            "ingress.1671886063.security_groups.#": "0",
+                            "ingress.1671886063.self": "false",
+                            "ingress.1671886063.to_port": "0",
+                            "name": "sg_private",
+                            "owner_id": "866893681515",
+                            "tags.%": "0",
+                            "vpc_id": "vpc-cf7fdba6"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                },
+                "aws_security_group.public": {
+                    "type": "aws_security_group",
+                    "depends_on": [
+                        "aws_vpc.vpc"
+                    ],
+                    "primary": {
+                        "id": "sg-bac747d3",
+                        "attributes": {
+                            "description": "Used for public and private instances for load balancer access",
+                            "egress.#": "1",
+                            "egress.482069346.cidr_blocks.#": "1",
+                            "egress.482069346.cidr_blocks.0": "0.0.0.0/0",
+                            "egress.482069346.from_port": "0",
+                            "egress.482069346.prefix_list_ids.#": "0",
+                            "egress.482069346.protocol": "-1",
+                            "egress.482069346.security_groups.#": "0",
+                            "egress.482069346.self": "false",
+                            "egress.482069346.to_port": "0",
+                            "id": "sg-bac747d3",
+                            "ingress.#": "2",
+                            "ingress.2214680975.cidr_blocks.#": "1",
+                            "ingress.2214680975.cidr_blocks.0": "0.0.0.0/0",
+                            "ingress.2214680975.from_port": "80",
+                            "ingress.2214680975.protocol": "tcp",
+                            "ingress.2214680975.security_groups.#": "0",
+                            "ingress.2214680975.self": "false",
+                            "ingress.2214680975.to_port": "80",
+                            "ingress.949236343.cidr_blocks.#": "1",
+                            "ingress.949236343.cidr_blocks.0": "52.8.19.107/32",
+                            "ingress.949236343.from_port": "22",
+                            "ingress.949236343.protocol": "tcp",
+                            "ingress.949236343.security_groups.#": "0",
+                            "ingress.949236343.self": "false",
+                            "ingress.949236343.to_port": "22",
+                            "name": "sg_public",
+                            "owner_id": "866893681515",
+                            "tags.%": "0",
+                            "vpc_id": "vpc-cf7fdba6"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                },
+                "aws_subnet.private1": {
+                    "type": "aws_subnet",
+                    "depends_on": [
+                        "aws_vpc.vpc",
+                        "data.aws_availability_zones.available"
+                    ],
+                    "primary": {
+                        "id": "subnet-cf69dea6",
+                        "attributes": {
+                            "availability_zone": "us-east-2a",
+                            "cidr_block": "10.1.2.0/24",
+                            "id": "subnet-cf69dea6",
+                            "map_public_ip_on_launch": "false",
+                            "tags.%": "1",
+                            "tags.Name": "private1",
+                            "vpc_id": "vpc-cf7fdba6"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                },
+                "aws_subnet.private2": {
+                    "type": "aws_subnet",
+                    "depends_on": [
+                        "aws_vpc.vpc",
+                        "data.aws_availability_zones.available"
+                    ],
+                    "primary": {
+                        "id": "subnet-52837829",
+                        "attributes": {
+                            "availability_zone": "us-east-2b",
+                            "cidr_block": "10.1.3.0/24",
+                            "id": "subnet-52837829",
+                            "map_public_ip_on_launch": "false",
+                            "tags.%": "1",
+                            "tags.Name": "private2",
+                            "vpc_id": "vpc-cf7fdba6"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                },
+                "aws_subnet.public": {
+                    "type": "aws_subnet",
+                    "depends_on": [
+                        "aws_vpc.vpc",
+                        "data.aws_availability_zones.available"
+                    ],
+                    "primary": {
+                        "id": "subnet-73b3af39",
+                        "attributes": {
+                            "availability_zone": "us-east-2c",
+                            "cidr_block": "10.1.1.0/24",
+                            "id": "subnet-73b3af39",
+                            "map_public_ip_on_launch": "true",
+                            "tags.%": "1",
+                            "tags.Name": "public",
+                            "vpc_id": "vpc-cf7fdba6"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                },
+                "aws_subnet.rds1": {
+                    "type": "aws_subnet",
+                    "depends_on": [
+                        "aws_vpc.vpc",
+                        "data.aws_availability_zones.available"
+                    ],
+                    "primary": {
+                        "id": "subnet-ce69dea7",
+                        "attributes": {
+                            "availability_zone": "us-east-2a",
+                            "cidr_block": "10.1.4.0/24",
+                            "id": "subnet-ce69dea7",
+                            "map_public_ip_on_launch": "false",
+                            "tags.%": "1",
+                            "tags.Name": "rds1",
+                            "vpc_id": "vpc-cf7fdba6"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                },
+                "aws_subnet.rds2": {
+                    "type": "aws_subnet",
+                    "depends_on": [
+                        "aws_vpc.vpc",
+                        "data.aws_availability_zones.available"
+                    ],
+                    "primary": {
+                        "id": "subnet-53837828",
+                        "attributes": {
+                            "availability_zone": "us-east-2b",
+                            "cidr_block": "10.1.5.0/24",
+                            "id": "subnet-53837828",
+                            "map_public_ip_on_launch": "false",
+                            "tags.%": "1",
+                            "tags.Name": "rds2",
+                            "vpc_id": "vpc-cf7fdba6"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                },
+                "aws_subnet.rds3": {
+                    "type": "aws_subnet",
+                    "depends_on": [
+                        "aws_vpc.vpc",
+                        "data.aws_availability_zones.available"
+                    ],
+                    "primary": {
+                        "id": "subnet-72b3af38",
+                        "attributes": {
+                            "availability_zone": "us-east-2c",
+                            "cidr_block": "10.1.6.0/24",
+                            "id": "subnet-72b3af38",
+                            "map_public_ip_on_launch": "false",
+                            "tags.%": "1",
+                            "tags.Name": "rds3",
+                            "vpc_id": "vpc-cf7fdba6"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                },
+                "aws_vpc.vpc": {
+                    "type": "aws_vpc",
+                    "depends_on": [],
+                    "primary": {
+                        "id": "vpc-cf7fdba6",
+                        "attributes": {
+                            "cidr_block": "10.1.0.0/16",
+                            "default_network_acl_id": "acl-ce4deda7",
+                            "default_route_table_id": "rtb-36bc1e5f",
+                            "default_security_group_id": "sg-bbc747d2",
+                            "dhcp_options_id": "dopt-9bee07f2",
+                            "enable_dns_hostnames": "false",
+                            "enable_dns_support": "true",
+                            "id": "vpc-cf7fdba6",
+                            "instance_tenancy": "default",
+                            "main_route_table_id": "rtb-36bc1e5f",
+                            "tags.%": "0"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                },
+                "aws_vpc_endpoint.private-s3": {
+                    "type": "aws_vpc_endpoint",
+                    "depends_on": [
+                        "aws_route_table.public",
+                        "aws_vpc.vpc",
+                        "aws_vpc.vpc"
+                    ],
+                    "primary": {
+                        "id": "vpce-7c618715",
+                        "attributes": {
+                            "id": "vpce-7c618715",
+                            "policy": "{\"Statement\":[{\"Action\":\"*\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Resource\":\"*\"}],\"Version\":\"2008-10-17\"}",
+                            "prefix_list_id": "pl-7ba54012",
+                            "route_table_ids.#": "2",
+                            "route_table_ids.13090338": "rtb-36bc1e5f",
+                            "route_table_ids.519680587": "rtb-0bbc1e62",
+                            "service_name": "com.amazonaws.us-east-2.s3",
+                            "vpc_id": "vpc-cf7fdba6"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                },
+                "data.aws_availability_zones.available": {
+                    "type": "aws_availability_zones",
+                    "depends_on": [],
+                    "primary": {
+                        "id": "2017-02-05 17:27:25.450235003 +0000 UTC",
+                        "attributes": {
+                            "id": "2017-02-05 17:27:25.450235003 +0000 UTC",
+                            "names.#": "3",
+                            "names.0": "us-east-2a",
+                            "names.1": "us-east-2b",
+                            "names.2": "us-east-2c"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                },
+                "random_id.ami": {
+                    "type": "random_id",
+                    "depends_on": [],
+                    "primary": {
+                        "id": "ci_-lBRaGlg",
+                        "attributes": {
+                            "b64": "ci_-lBRaGlg",
+                            "b64_std": "ci/+lBRaGlg=",
+                            "b64_url": "ci_-lBRaGlg",
+                            "byte_length": "8",
+                            "dec": "8228074956179249752",
+                            "hex": "722ffe94145a1a58",
+                            "id": "ci_-lBRaGlg"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                },
+                "random_id.asg": {
+                    "type": "random_id",
+                    "depends_on": [],
+                    "primary": {
+                        "id": "oijYSzAyZiQ",
+                        "attributes": {
+                            "b64": "oijYSzAyZiQ",
+                            "b64_std": "oijYSzAyZiQ=",
+                            "b64_url": "oijYSzAyZiQ",
+                            "byte_length": "8",
+                            "dec": "11684827050655508004",
+                            "hex": "a228d84b30326624",
+                            "id": "oijYSzAyZiQ"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": ""
+                }
+            },
+            "depends_on": []
+        }
+    ]
+}
